@@ -96,7 +96,7 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
         manifestPlaceholders = [
-                JPUSH_APPKEY: "496aed4db450acb7b78adf6b", //在此替换你的APPKey
+                JPUSH_APPKEY: "9d68d158e4f1e0286f0b106c", //在此替换你的APPKey
                 APP_CHANNEL: "developer-default"    //应用渠道号
         ]
     }

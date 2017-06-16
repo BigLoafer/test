@@ -2,13 +2,13 @@
  * Created by haokai on 2017/5/10.
  */
 import React,{PureComponent} from 'react'
-import {View, Text, Image, StyleSheet, TextInput, Dimensions, TouchableOpacity,Keyboard} from 'react-native'
+import {View, Text, Image, StyleSheet, TextInput, Dimensions, TouchableOpacity,Keyboard, Platform} from 'react-native'
 import NavigationBar from '../../common/NavigationBar'
 import ViewUtils from '../../common/ViewUtils'
 import px2dp from '../../tools/px2dp'
 import ChangeTouchableButton from '../../common/ChangeTouchableButton'
 import BaseCommon from '../../common/BaseCommon'
-
+import ForgetPassWord from './ForgetPassWord'
 export  default class LoginPage extends PureComponent{
     // 构造
       constructor(props) {
@@ -38,6 +38,19 @@ export  default class LoginPage extends PureComponent{
         this.props.navigator.pop();
     }
 
+    gotoForget=()=>{
+        this.props.navigator&&this.props.navigator.push({
+            component:ForgetPassWord
+        });
+    };
+
+    /**
+     * 跳转注册
+     */
+    gotoRegistPager=()=>{
+
+    };
+
     render(){
         return(
             <Image
@@ -61,7 +74,7 @@ export  default class LoginPage extends PureComponent{
 
                         <Image  style={styles.img} source={require('../../resource/ic_tab_search.png')}/>
                         <TextInput
-                            style={{flex: 1,height:px2dp(130)}}
+                            style={{width:px2dp(900),height:px2dp(130)}}
                             placeholder="手机号"
                             underlineColorAndroid="transparent"
                         >
@@ -83,11 +96,11 @@ export  default class LoginPage extends PureComponent{
                         text="登录">
                     </ChangeTouchableButton>
                     <View style={styles.text}>
-                        <TouchableOpacity style={{flex: 1}}>
+                        <TouchableOpacity style={{flex: 1}} onPress={this.gotoRegistPager}>
                             <Text style={{color: '#fff'}}>快速注册</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity >
+                        <TouchableOpacity onPress={this.gotoForget}>
                             <Text style={{color: "#fff"}}>忘记密码?</Text>
                         </TouchableOpacity>
 
@@ -106,17 +119,18 @@ const styles=StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0)',
         flexDirection:'row',
         alignItems:'center',
-        height:50
+        height:50,
+        marginTop:Platform.OS=='ios'?20:0
     },
     img:{
         width:px2dp(80),
         height:px2dp(80),
-        marginRight:px2dp(30)
+        marginRight:px2dp(30),
+        marginLeft:px2dp(30)
     },
     inputCon:{
         flexDirection:"row",
         height:px2dp(130),
-        padding:px2dp(30),
         alignItems:'center',
         marginHorizontal:px2dp(50),
         borderRadius:px2dp(12),

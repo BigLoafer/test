@@ -8,6 +8,9 @@ import TableRow from '../../common/TableRow'
 import px2dp from '../../tools/px2dp'
 import CommonStore from '../../mobx/CommonStore'
 
+import GetAccountPage from '../account/GetAccountPage'
+import TestJpushPage from '../TestJpushPage'
+import Second from '../../Second'
 import {observer} from 'mobx-react/native'
 import {reaction} from 'mobx'
 
@@ -35,6 +38,10 @@ export default class HomePage extends PureComponent{
 
         JPushModule.addReceiveOpenNotificationListener((map)=>{
             console.warn('打开指定页面');
+
+            this.props.navigator&&this.props.navigator.push({
+                component:Second
+            });
         })
     }
 
@@ -55,7 +62,7 @@ export default class HomePage extends PureComponent{
 
     }
 
-    componentWillUnMount() {
+    componentWillUnmount() {
         JPushModule.removeReceiveCustomMsgListener();
         JPushModule.removeReceiveNotificationListener();
         JPushModule.removeReceiveOpenNotificationListener()
@@ -66,12 +73,18 @@ export default class HomePage extends PureComponent{
     };
 
     _onPressImg=()=>{
-        this.cstore.changeSecure();
+        this.cstore.changeSecure1();
+    };
+
+    gotoTest=()=>{
+        this.props.navigator&&this.props.navigator.push({
+            component:GetAccountPage
+        });
     };
     render(){
         return(
             <View>
-                <Text>
+                <Text style={{padding:px2dp(30),marginTop:px2dp(50)}} onPress={this.gotoTest}>
                     这是首页
                 </Text>
                 <TableRow
@@ -86,20 +99,6 @@ export default class HomePage extends PureComponent{
                     title='账户余额'
                     onPress={this._onPressItem}
                 />
-                <View style={{flexDirection:'row',height:px2dp(120),padding:px2dp(30)
-                ,alignItems:'center',borderBottomColor:'black',borderBottomWidth:1,marginHorizontal:px2dp(30)}}>
-                <TextInput
-                    ref="tt"
-                    style={{flex: 1,height:px2dp(120)}}
-                    placeholder="登录密码"
-                    secureTextEntry={this.cstore.isSecure}
-                    underlineColorAndroid="transparent"
-                   >
-                </TextInput>
-                    <TouchableOpacity onPress={this._onPressImg}>
-                        <Image style={{width:px2dp(50),height:px2dp(50)}} source={require('../../resource/ic_tab_search.png')}/>
-                    </TouchableOpacity>
-                </View>
             </View>
         );
     }

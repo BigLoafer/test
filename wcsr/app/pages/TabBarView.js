@@ -36,6 +36,7 @@ export  default class TabBarView extends PureComponent{
      * 测试超时
      */
      async componentDidMount() {
+
         try{
             const data=await post({
                 requestType: "5002",
@@ -48,7 +49,8 @@ export  default class TabBarView extends PureComponent{
                     pageNo: '1'
                 }
             });
-            console.log(data)
+            console.log(data);
+            console.log(data.test.isOk)
 
         }catch(error) {
             console.log(error)

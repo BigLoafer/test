@@ -5,6 +5,8 @@ import React,{PureComponent} from 'react'
 import {View, Text} from 'react-native'
 import LoginPage from './LoginPage'
 
+import Test from '../home/test'
+
 export default class HomePage extends PureComponent{
     // 构造
       constructor(props) {
@@ -23,7 +25,7 @@ export default class HomePage extends PureComponent{
     render(){
         return(
             <View>
-                <Text onPress={this.gotoLoginPage}>
+                <Text  style={{marginTop:100}} onPress={this.gotoLoginPage}>
                     AccountPage
                 </Text>
                 

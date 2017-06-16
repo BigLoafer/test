@@ -2,7 +2,6 @@
  * Created by haokai on 2017/3/29.
  */
 
-
 function timeout() {
     var p = new Promise(function(resolve, reject){
         setTimeout(function(){
@@ -14,7 +13,7 @@ function timeout() {
 
 function getData(body) {
 
-    return fetch('http://jtqb.shizitegong.com/req/app',{
+    return fetch('http://192.168.0.102:8000/home/test/',{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -29,7 +28,7 @@ export  default function post(body) {
         Promise.race([getData(body),timeout()])
             .then((res)=>res.json())
             .then((jsondata)=>{
-                if(jsondata) resolve(jsondata)
+                if(jsondata) resolve(jsondata);
                 else reject('加载失败')
             })
             .catch((error)=>{
